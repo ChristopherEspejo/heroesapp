@@ -1,0 +1,80 @@
+<h1> {{(heroe.id)?'Editar':'Nuevo'}} Heroe <small>{{heroe.superhero|titlecase}}</small></h1>
+
+<div fxLayout="row" 
+     fxLayout.xs="column"
+     fxLayoutGap="40px">
+<div fxFlex="50" fxLayout="column">
+
+    <div  fxLayout="row" 
+          fxLayout.xs="column" 
+          fxLayoutGap="20px"> 
+        <mat-form-field fxFlex="50">
+            <mat-label>Super Heroe</mat-label>
+            <input matInput
+                    type="text"
+                    [(ngModel)]="heroe.superhero"
+                    required>
+        </mat-form-field>
+        <mat-form-field fxFlex="50">
+            <mat-label>Alter Ego</mat-label>
+            <input matInput
+                    type="text"
+                    [(ngModel)]="heroe.alter_ego"
+                    required>
+        </mat-form-field>
+    </div>
+    <mat-form-field >
+        <mat-label>Primera Aparición</mat-label>
+        <input matInput
+                type="text"
+                [(ngModel)]="heroe.first_appearance"
+                required>
+    </mat-form-field>
+    <mat-form-field ><!-- ya no le ponemos flex porque es  vista column --> 
+        <mat-label>Personajes</mat-label>
+        <input matInput
+                type="text"
+                [(ngModel)]="heroe.characters"
+                required>
+    </mat-form-field>
+    <mat-form-field >
+        <mat-label>Casa creadora</mat-label>
+        <mat-select [(ngModel)]="heroe.publisher" required>
+            <mat-option *ngFor="let publisher of publishers"
+                        [value]="publisher.id" > 
+                {{publisher.desc}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field ><!-- ya no le ponemos flex porque es  vista column --> 
+        <mat-label>foto Url</mat-label>
+        <input matInput
+                type="text"
+                [(ngModel)]="heroe.alt_img"
+                required>
+    </mat-form-field>
+    <br>
+    <div fxLayout>
+    <button mat-raised-button 
+            color="primary"
+            (click)="guardar()" >
+            {{(heroe.id)?'Actualizar':'Agregar'}}
+    </button>
+    <span class="spacer"></span>
+    <button *ngIf="heroe.id"
+            mat-raised-button
+            (click)="borrarHeroe()"
+            color="warn">
+            <mat-icon >remove</mat-icon>
+            Borrar
+        </button>
+    </div>
+    
+</div>
+<div fxFlex="50">
+    <img [src]="heroe|imagen">
+<!--     <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/robin-batman-1582188868.jpg?crop=0.9635237439779766xw:1xh;center,top&resize=1200:*" alt="">
+ --></div>
+
+
+</div>
